@@ -341,3 +341,35 @@
 .search-custom:hover{
   background-color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .fh5co-nav-toggle {
+    top: 0px !important;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  #fh5co-header .navbar-brand {
+    font-size: 20px !important;
+  }
+  .fh5co-nav-toggle {
+    top: 0px !important;
+  }
+}
+@media screen and (max-width: 340px) {
+  #fh5co-header .navbar-brand {
+    font-size: 15px !important;
+  }
+}
+@media screen and (max-width: 270px) {
+  #fh5co-header .navbar-brand {
+    font-size: 10px !important;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .owl-carousel-fullwidth .item .iphone-image .iphone {
+    height: 10%;
+    width: 10%;
+  }
+}
