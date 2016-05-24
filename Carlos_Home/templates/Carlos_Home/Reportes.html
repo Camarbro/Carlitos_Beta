@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %} Registros {% endblock %}
 {% block inicio %}
 <li class="active"><a href="{% url 'home' %}" data-nav-section="home"><span>Inicio</span></a></li>
 {% endblock %}
 {% block content %}
-<aside class="callout" style="background: url(static/images/admin.jpg) no-repeat center center scroll;">
+<aside class="callout" style="background: url({% static 'images/admin.jpg' %}) no-repeat center center scroll;">
   <div class="text-vertical-center">
-      <h1 style="color: #fff">Vista Reportes</h1>
+      <h1 style="color: #fff">Reportes</h1>
   </div>
 </aside>
 <div class="container">
@@ -25,20 +26,20 @@
                                 <strong>Reporte Profesionista</strong>
                             </h4>
                             <p>For new users </p>
-                            <a href="{% url 'reporte_profesionista_view' %}"  class="btn btn-primary btn-lg">Click Here!</a>
+                            <a href="{% url 'reporte_profesionista_view' %}"  class="btn btn-primary btn-lg">Entrar</a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="service-item">
                             <span style = "color: #00e600" class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x"></i>
-                              <i style = "color: #fff" class="fa fa-user-plus fa-stack-1x text-primary"></i>
+                              <i style = "color: #fff" class="fa fa-stethoscope fa-stack-1x text-primary"></i>
                             </span>
                             <h4>
                                 <strong>Reporte Paciente</strong>
                             </h4>
                             <p>Start a new order</p>
-                            <a href="{% url 'reporte_paciente_view' %}"  class="btn btn-primary btn-lg">Click Here!</a>
+                            <a href="{% url 'reporte_paciente_view' %}"  class="btn btn-primary btn-lg">Entrar</a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
@@ -51,20 +52,20 @@
                                 <strong>Reporte Curso</strong>
                             </h4>
                             <p>Quality Options for Supervisors</p>
-                            <a href="{% url 'reporte_curso_view' %}"  class="btn btn-primary btn-lg">Click Here!</a>
+                            <a href="{% url 'reporte_curso_view' %}"  class="btn btn-primary btn-lg">Entrar</a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="service-item">
                             <span style = "color: #ff0000" class="fa-stack fa-4x">
                             <i  class="fa fa-circle fa-stack-2x"></i>
-                            <i style = "color: #fff" class="fa fa-file-text fa-stack-1x text-primary"></i>
+                            <i style = "color: #fff" class="fa fa-search fa-stack-1x text-primary"></i>
                         </span>
                             <h4>
-                                <strong>Otro Registro</strong>
+                                <strong>Busqueda</strong>
                             </h4>
-                            <p>Report Seccction for the Bauss</p>
-                            <a href="#"  class="btn btn-primary btn-lg">Click Here!</a>
+                            <p>Realizar una busqueda</p>
+                            <a href="{% url 'buscar' %}"  class="btn btn-primary btn-lg">Entrar</a>
                         </div>
                     </div>
                 </div>
