@@ -7,6 +7,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User, Permission
+from django.utils import timezone
+from datetime import datetime, date
+from django import forms
 
 # Create your views here.
 
@@ -126,7 +129,10 @@ class PacienteView(FormView):
         p.telefono = form.cleaned_data['telefono']
         p.email = form.cleaned_data['email']
         p.genero = form.cleaned_data['genero']
-        p.save()
+        if date.today() > p.fecha_ingreso:
+            return render_to_response('Carlos_Home/Registro_paciente.html', {'form' : form})
+        else:
+            p.save()
         return super(PacienteView,self).form_valid(form)
 
 class ReportePaciente(ListView):

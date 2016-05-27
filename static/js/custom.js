@@ -10,7 +10,9 @@ $(document).ready(function() {
 			state = $(this).val() ? true : false;
 		}else if ($group.data('validate') == "email") {
 			state = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(this).val())
-		}else if($group.data('validate') == 'phone') {
+		}else if ($group.data('validate') == "text") {
+		  state = /^[a-zA-Z\s]+$/.test($(this).val())
+    }else if($group.data('validate') == 'phone') {
 			state = /^\+?1?\d{9,15}$/.test($(this).val())
 		}else if ($group.data('validate') == "time") {
 		  state = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/.test($(this).val())

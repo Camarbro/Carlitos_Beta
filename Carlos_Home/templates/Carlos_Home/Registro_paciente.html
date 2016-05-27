@@ -24,13 +24,13 @@
           <form role = "form" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <div class="input-group">
+              <div class="input-group" data-validate="text">
                 <input type="text" class="form-control" name="nombre_paciente" id="id_nombre_paciente" placeholder="Nombre" required>
                 <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
             </div>
             <div class="form-group">
-              <div class="input-group">
+              <div class="input-group" data-validate="text">
                 <input type="text" class="form-control" name="apellido_paciente" id="id_apellido_paciente" placeholder="Apellido" required>
                 <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
@@ -124,6 +124,13 @@
                 <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
             </div>
+            {% if form.errors %}
+              <div class="alert alert-danger col-xs-8 col-xs-push-2" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              &nbsp;Algo esta mal.
+              </div>
+            {% endif %}
             <div class="btn-group  col-xs-8 col-xs-push-2" role="group" aria-label="..." style="padding-left: 0px;padding-right: 0px;">
               <button type="submit" class="btn btn-default btnDef1 col-xs-6">Register</button>
               <button type="reset" class="btn btn-default btnDef2 col-xs-6">Cancel</button>
