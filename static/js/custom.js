@@ -12,10 +12,12 @@ $(document).ready(function() {
 			state = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(this).val())
 		}else if ($group.data('validate') == "text") {
 		  state = /^[a-zA-Z\s]+$/.test($(this).val())
+    }else if ($group.data('validate') == "positive_integer") {
+		  state = /^(([0-9]{1,2}))$/.test($(this).val())
     }else if($group.data('validate') == 'phone') {
 			state = /^\+?1?\d{9,15}$/.test($(this).val())
 		}else if ($group.data('validate') == "time") {
-		  state = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/.test($(this).val())
+		  state = /^([01]?[0-9]|2[0-3]):[0-5][0-9]?$/.test($(this).val())
 		}else if ($group.data('validate') == "date") {
 			state = /^(0[1-9]|1[0-2])[\/](0[1-9]|[12]\d|3[01])[\/](19|20)\d{2}$/.test($(this).val())
 		}else if ($group.data('validate') == "length") {

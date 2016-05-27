@@ -74,6 +74,9 @@ class CursoView(FormView):
         p.imparte = form.cleaned_data['imparte']
         p.fecha = form.cleaned_data['fecha']
         p.imgen = form.cleaned_data['imgen']
+        if p.horario_inicio > p.horario_final:
+            error = ["Curso no puede empezar antes de terminar"]
+            return render_to_response('Carlos_Home/Registro_curso.html', {'error':error, 'form':form})
         p.save()
         return super(CursoView,self).form_valid(form)
 
@@ -100,6 +103,9 @@ class ProfesionitaView(FormView):
         p.email = form.cleaned_data['email']
         permiso = Permission.objects.get(codename='es_profesionista')
         p.perfil_usuario.user_permissions.add(permiso)
+        if p.horario_inicio > p.horario_final:
+            error = ["Profesionista no puede empezar mas tarde del final"]
+            return render_to_response('Carlos_Home/Registro_prof.html', {'error':error, 'form':form})
         p.save()
         return super(ProfesionitaView,self).form_valid(form)
 
@@ -130,7 +136,8 @@ class PacienteView(FormView):
         p.email = form.cleaned_data['email']
         p.genero = form.cleaned_data['genero']
         if date.today() > p.fecha_ingreso:
-            return render_to_response('Carlos_Home/Registro_paciente.html', {'form' : form})
+            error = ['Fecha de ingreso no puede ser anterior a la fecha actual']
+            return render_to_response('Carlos_Home/Registro_paciente.html', {'error':error})
         else:
             p.save()
         return super(PacienteView,self).form_valid(form)
@@ -208,9 +215,10 @@ class Crear_Post(FormView):
         p.contenido = form.cleaned_data['contenido']
         p.categorias = form.cleaned_data['categorias']
         p.post_imagen = form.cleaned_data['post_imagen']
-        p.creado = form.cleaned_data['creado']
+        p.creado = date.today()
         p.post_video = form.cleaned_data['post_video']
         p.autor = form.cleaned_data['autor']
+        p.rating = form.cleaned_data['rating']
         p.save()
         return super(Crear_Post, self).form_valid(form)
 
@@ -242,3 +250,28 @@ def buscar2(request):
 	else:
 		ctx = {'mensaje':'no hay datos..'}
 	return render(request, 'Carlos_Home/buscar2.html', ctx)
+
+def delete_post(request, id=None):
+	post = get_object_or_404(Post, ID_Post=id)
+	post.delete()
+	return redirect('post_lista')
+
+def update_post(request, id=None):
+	post = get_object_or_404(Post, ID_Post=id)
+	form = PostForm(request.POST or None, request.FILES or None, instance=post)
+	if form.is_valid():
+		try:
+			post = form.save()
+			post.save()
+			context = {
+				"post": post,
+			}
+			return render(request, "Carlos_Home/post_detalle.html", context)
+		except:
+			print 'An error'
+	context = {
+		"object_list": "eee",
+		"post": post,
+		"form": form,
+	}
+	return render(request, "Carlos_Home/post_update.html", context)

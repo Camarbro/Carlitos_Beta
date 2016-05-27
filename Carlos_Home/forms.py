@@ -49,7 +49,7 @@ class PacienteForm(forms.Form):
     )
     area = forms.ChoiceField(choices = AREAS)
     fecha_ingreso = forms.DateField()
-    fecha_conclusion = forms.DateField()
+    fecha_conclusion = forms.DateField(required = False)
     Opciones = (
         ('SI', 'Si'),
         ('NO', 'No'),
@@ -87,6 +87,12 @@ class PostForm(forms.Form):
     contenido = forms.CharField(widget=forms.Textarea())
     categorias = forms.ModelChoiceField(Categoria.objects ,  empty_label= "Selecciona Categoria")
     post_imagen = forms.ImageField(required = False)
-    creado = forms.DateField()
     post_video = forms.CharField(required = False)
     autor = forms.ModelChoiceField(User.objects.all(), empty_label = "Selecciona autor")
+    RATINGS = (
+        ("NR", 'No recomendado'),
+        ("AC", "A consideracion"),
+        ("RC", "Recomendado"),
+        ("NA", "No aplica")
+    )
+    rating = forms.ChoiceField(choices = RATINGS)

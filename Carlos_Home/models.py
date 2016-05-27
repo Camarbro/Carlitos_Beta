@@ -81,6 +81,13 @@ class Post(models.Model):
     creado = models.DateField(default=timezone.now)
     post_video = models.CharField(max_length = 300, null = True)
     autor = models.ForeignKey(User)
+    RATINGS = (
+        ("NR", 'No recomendado'),
+        ("AC", "A consideracion"),
+        ("RC", "Recomendado"),
+        ("NA", "No aplica")
+    )
+    rating = models.CharField(max_length = 2, choices = RATINGS, default = "Select")
 
     def __str__(self):
         return self.titulo
@@ -97,7 +104,7 @@ class Paciente(models.Model):
     )
     area = models.CharField(max_length = 15, choices = AREAS) # esto no viene siendo lo mismo que los cursos?
     fecha_ingreso = models.DateField(default=timezone.now)
-    fecha_conclusion = models.DateField(default=timezone.now)
+    fecha_conclusion = models.DateField(default=timezone.now, null = True)
     EVALUACION = (
         ('SI', 'Si'),
         ('NO', 'No'),

@@ -11,7 +11,7 @@
 <div class="container">
   <div class="row" >
     <div class="col-xs-12">
-      <h3 style="text-align: center">Publicado en {{post.categorias}} por {{post.autor}}</h3>
+      <h3 style="text-align: center">Publicado en {{post.categorias}} por {{post.autor | capfirst}}</h3>
       {% if post.post_imagen %}
       <div class="text-center">
         <img style="height: 350px" class="  img-rounded" src="{{post.post_imagen.url}}" alt="" />
@@ -19,12 +19,49 @@
       {% endif %}
       <p style="text-align: center">{{ post.contenido | capfirst }}</p>
       {% if post.post_video %}
-      <div class="video-container">
+      <div class="video-container text-center">
         <iframe width="560" height="315" src="{{ post.post_video }}" frameborder="0" allowfullscreen></iframe>
       </div>
       {% endif %}
-      <p style="text-align: right;font-size: 12px;padding-right: 10pt">{{ post.creado }}</p>
-      <div class="col-xs-6 col-xs-offset-6">
+      {% if post.rating != "NA" %}
+      <div style="margin-top: 25px"class="row">
+          <div class="col-md-6 text-center">
+              <div class="service-item">
+                {% if post.rating == "NR" %}
+                <span style = "color: #ff0000" class="fa-stack fa-4x">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i style = "color: #fff" class="fa fa-hand-stop-o fa-stack-1x text-primary"></i>
+                </span>
+                <p>No recomendado </p>
+                {% endif %}
+                {% if post.rating == "AC" %}
+                <span style = "color: #ff9900" class="fa-stack fa-4x">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i style = "color: #fff" class="fa fa-exclamation fa-stack-1x text-primary"></i>
+                </span>
+                <p>A consideracion de los padres </p>
+                {% endif %}
+                {% if post.rating == "RC" %}
+                <span style = "color: #009900" class="fa-stack fa-4x">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i style = "color: #fff" class="fa fa-thumbs-o-up fa-stack-1x text-primary"></i>
+                </span>
+                <p>Recomendado</p>
+                {% endif %}
+              </div>
+          </div>
+          <div class="col-md-6 text-center">
+            <ul class="share-links" style="margin-left: 275px; margin-top: 25px; list-style-type: none;">
+              <li class="facebook"><a style = "text-decoration: none; font-size: 26px;" href="https://www.facebook.com/sharer/sharer.php?u=https://carlosbeta.herokuapp.com/post_detalle/{{post.ID_Post}}" onclick="javascript:window.open(this.href,
+      '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" ><span class="fa fa-facebook"></span></a></li>
+              <li class="twitter"><a style = "text-decoration: none; font-size: 26px;" href="https://twitter.com/intent/tweet?url=https://carlosbeta.herokuapp.com/post_detalle/{{post.ID_Post}}"><span class="fa fa-twitter"></span></a></li>
+              <li class="googleplus"><a style = "text-decoration: none; font-size: 26px;" href="https://plus.google.com/share?url={https://carlosbeta.herokuapp.com/post_detalle/{{post.ID_Post}}}" onclick="javascript:window.open(this.href,
+      '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="fa fa-google-plus"></span></a></li>
+            </ul>
+          </div>
+      </div>
+      {% else %}
+      <div style="margin-top: 45px" class="col-xs-6 col-xs-offset-6">
         <ul class="share-links" style="list-style-type: none;">
           <li class="facebook"><a style = "text-decoration: none; font-size: 26px;" href="https://www.facebook.com/sharer/sharer.php?u=https://carlosbeta.herokuapp.com/post_detalle/{{post.ID_Post}}" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" ><span class="fa fa-facebook"></span></a></li>
@@ -33,13 +70,15 @@
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="fa fa-google-plus"></span></a></li>
         </ul>
       </div>
+      {% endif %}
     </div>
   </div>
+  <p style="text-align: right;font-size: 12px;padding-right: 10pt">{{ post.creado }}</p>
 </div>
 <div  style="margin-top: 100px;"class="container">
   {% if user.is_authenticated %}
-    <button type="button" class="btn btn-default btnDef1 col-xs-2 col-xs-offset-4"><i class="icon-pencil"></i></button>
-    <button type="button" class="btn btn-default btnDef2 col-xs-2"><i class="icon-remove"></i></button>
+    <a href="{% url 'update_post' id=post.ID_Post %}" class="btn btn-default btnDef1 col-xs-2 col-xs-offset-4"><i class="icon-pencil"></i></a>
+    <a href="{% url 'delete_post' id=post.ID_Post %}" class="btn btn-default btnDef2 col-xs-2"><i class="icon-remove"></i></a>
   {% endif%}
 </div>
 {% endblock %}
