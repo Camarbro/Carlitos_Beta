@@ -16,7 +16,7 @@
         <h2 style="padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px; " ><a href="{% url 'post_detalle' id=post.ID_Post %}">{{ post.titulo | title }}</a></h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
-            <h3>Publicado en {{ post.categorias | title }} por Carlitos Quintero </h3>
+            <h3>Publicado en {{ post.categorias | title }} por {{post.autor | capfirst}} </h3>
             <p>
               {{post.desc}}
             </p>

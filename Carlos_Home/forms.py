@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Curso, Categoria, Profesionista
+from .models import Curso, Categoria, Profesionista, Post
 
 class ContactForm(forms.Form):
     name = forms.CharField()
@@ -81,18 +81,8 @@ class User_form(UserCreationForm):
         model = User
         fields = ['email', 'username', 'first_name', 'last_name', 'password1','password2', 'is_superuser']
 
-class PostForm(forms.Form):
-    titulo = forms.CharField()
-    desc = forms.CharField(max_length = 150, widget = forms.Textarea())
-    contenido = forms.CharField(widget=forms.Textarea())
-    categorias = forms.ModelChoiceField(Categoria.objects ,  empty_label= "Selecciona Categoria")
-    post_imagen = forms.ImageField(required = False)
-    post_video = forms.CharField(required = False)
-    autor = forms.ModelChoiceField(User.objects.all(), empty_label = "Selecciona autor")
-    RATINGS = (
-        ("NR", 'No recomendado'),
-        ("AC", "A consideracion"),
-        ("RC", "Recomendado"),
-        ("NA", "No aplica")
-    )
-    rating = forms.ChoiceField(choices = RATINGS)
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        exclude = ['creado']

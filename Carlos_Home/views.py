@@ -256,22 +256,23 @@ def delete_post(request, id=None):
 	post.delete()
 	return redirect('post_lista')
 
-def update_post(request, id=None):
-	post = get_object_or_404(Post, ID_Post=id)
-	form = PostForm(request.POST or None, request.FILES or None, instance=post)
-	if form.is_valid():
-		try:
-			post = form.save()
-			post.save()
-			context = {
-				"post": post,
-			}
-			return render(request, "Carlos_Home/post_detalle.html", context)
-		except:
-			print 'An error'
-	context = {
-		"object_list": "eee",
-		"post": post,
-		"form": form,
-	}
-	return render(request, "Carlos_Home/post_update.html", context)
+def update_post(request, id):
+    post = get_object_or_404(Post, ID_Post=id)
+    form = PostForm(request.POST or None, request.FILES or None, instance=post)
+    if form.is_valid():
+        try:
+            post = form.save()
+            post.save()
+            context = {
+                "post":post,
+            }
+            return render(request, "Carlos_Home/post_detalle.html", context)
+        except:
+            print "An error"
+    context = {
+        "object_list": "eee",
+        "post":post,
+        "form": form,
+        "Categoria": Categoria.objects.all()
+    }
+    return render(request, "Carlos_Home/post_update.html", context)

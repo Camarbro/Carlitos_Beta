@@ -77,9 +77,9 @@ class Post(models.Model):
     desc = models.CharField(max_length = 150)
     contenido = models.TextField()
     categorias = models.ForeignKey(Categoria)
-    post_imagen = models.ImageField(upload_to='post_imagen/')
+    post_imagen = models.ImageField(upload_to='post_imagen/', blank = True, null = True)
     creado = models.DateField(default=timezone.now)
-    post_video = models.CharField(max_length = 300, null = True)
+    post_video = models.CharField(max_length = 300, blank = True, null = True)
     autor = models.ForeignKey(User)
     RATINGS = (
         ("NR", 'No recomendado'),
