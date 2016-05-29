@@ -104,7 +104,7 @@ class Paciente(models.Model):
     )
     area = models.CharField(max_length = 15, choices = AREAS) # esto no viene siendo lo mismo que los cursos?
     fecha_ingreso = models.DateField(default=timezone.now)
-    fecha_conclusion = models.DateField(default=timezone.now, null = True)
+    fecha_conclusion = models.DateField(default=timezone.now, null = True, blank = True)
     EVALUACION = (
         ('SI', 'Si'),
         ('NO', 'No'),

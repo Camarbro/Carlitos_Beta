@@ -14,14 +14,21 @@
 	<div class="row">
 		<div class="text-center">
 			<h1>Reporte</h1>
+    </div>
       <div class="table-responsive">
         <table class="table table-hover">
-        <th>Numero Curso</th>
+        <th>Id</th>
         <th>Curso</th>
+        <th>Fecha</th>
+        <th>Costo</th>
+        <th>Eliminar</th>
         {% for item in object_list %}
         <tr>
-          <td>{{item.numero_curso}}</td>
-          <td>{{item.curso}}</td>
+          <td>{{item.ID_Curso}}</td>
+          <td><a href="{% url 'edicion_curso' id=item.ID_Curso %}">{{item.curso}}</a></td>
+          <td>{{item.fecha}}</td>
+          <td>{{item.costo}}</td>
+          <td><a href="{% url 'delete_curso' id=item.ID_Curso %}"><i class="fa fa-times "></i></a></td>
         </tr>
         {% endfor %}
         </table>

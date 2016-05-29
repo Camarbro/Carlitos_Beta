@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block inicio %}<li class="active"><a href="#" data-nav-section="home"><span>Inicio</span></a></li>{% endblock %}
+
+{% block content %}
+<aside class="callout" style="background: url({% static 'images/admin.jpg' %}) no-repeat center center scroll;">
+  <div class="text-vertical-center">
+      <h1 style="color: #fff">Listado de Pacientes</h1>
+  </div>
+</aside>
+
+  <div class="container" style="margin-top: 15px">
+    {% for paciente in object_list %}
+    <div class="row row-bottom-padded-xs thumbnail">
+      <div style = "padding-bottom: 0px; margin-bottom: 0px;" class="col-md-12 section-heading text-center">
+        <h2 style="padding-bottom: 0px; margin-bottom: 0px; margin-top: 0px; " ><a href="{% url 'edicion_paciente' id=paciente.ID_Paciente %}">{{paciente.nombre_paciente | title }} {{paciente.apellido_paciente | title }}</a></h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h3>Ingreso el {{ paciente.fecha_ingreso | title }} con  {{paciente.edad_ingreso | capfirst}} años </h3>
+            <p>
+              {{paciente.diagnostico}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    {% endfor %}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="pagination">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">siguiente</a>
+            {% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+{% endblock %}

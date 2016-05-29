@@ -27,6 +27,7 @@
           <th>Horario final</th>
       		<th>Telefono</th>
       		<th>Correo electronico</th>
+          <th>Eliminar</th>
       	{% for item in object_list %}
       	<tr>
         <td>{{item.ID_Profesionista}}</td>
@@ -34,9 +35,11 @@
       	<td>{{item.nombre_profesionista}}</td>
       	<td>{{item.apellido_profesionista}}</td>
       	<td>{{item.reportes}}</td>
-      	<td>{{item.horario}}</td>
+      	<td>{{item.horario_inicio}}</td>
+        <td>{{item.horario_final}}</td>
       	<td>{{item.telefono}}</td>
       	<td>{{item.email}}</td>
+        <td><a href="{% url 'delete_profesionista' id=item.ID_Profesionista %}"><i class="fa fa-times "></i></a></td>
       	</tr>
       		{% endfor %}
           	{% endif %}

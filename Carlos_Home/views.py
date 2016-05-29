@@ -256,6 +256,21 @@ def delete_post(request, id=None):
 	post.delete()
 	return redirect('post_lista')
 
+def delete_curso(request, id = None):
+    curso = get_object_or_404(Curso, ID_Curso = id)
+    curso.delete()
+    return redirect('reporte_cursos')
+
+def delete_paciente(request, id = None):
+    paciente = get_object_or_404(Paciente, ID_Paciente = id)
+    paciente.delete()
+    return redirect('reporte_paciente_view')
+
+def delete_profesionista(request, id = None):
+    profesionista = get_object_or_404(Profesionista, ID_Profesionista = id)
+    profesionista.delete()
+    return redirect('reporte_profesionista_view')
+
 def update_post(request, id):
     post = get_object_or_404(Post, ID_Post=id)
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
@@ -276,3 +291,65 @@ def update_post(request, id):
         "Categoria": Categoria.objects.all()
     }
     return render(request, "Carlos_Home/post_update.html", context)
+
+def edicion_registros(request):
+    return render(request, 'Carlos_Home/edicion_registros.html')
+
+def lista_paciente(request):
+	queryset_list = Paciente.objects.all().order_by('-ID_Paciente')
+	paginator = Paginator(queryset_list, 15) # Show 3 contacts per page
+
+	page = request.GET.get('page')
+	try:
+		queryset = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+		queryset = paginator.page(1)
+	except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+		queryset = paginator.page(paginator.num_pages)
+	context = {
+		"object_list": queryset
+	}
+	return render(request, "Carlos_Home/lista_paciente.html", context)
+
+def edicion_paciente(request, id):
+    paciente = get_object_or_404(Paciente, ID_Paciente = id)
+    form = PacienteForm(request.POST or None, request.FILES or None, instance = paciente)
+    if form.is_valid():
+        try:
+            paciente = form.save()
+            paciente.save()
+            context = {
+                "paciente":paciente,
+            }
+            return redirect('lista_paciente')
+        except:
+            print "An error"
+    context = {
+        "object_list": "eee",
+        "paciente":paciente,
+        "form": form,
+    }
+    return render(request, "Carlos_Home/edicion_paciente.html", context)
+
+def edicion_curso(request, id):
+    curso = get_object_or_404(Curso, ID_Curso = id)
+    form = RegistroCursoForm(request.POST or None, request.FILES or None, instance = curso)
+    if form.is_valid():
+        try:
+            curso = form.save()
+            curso.save()
+            context = {
+                "curso":curso,
+            }
+            return redirect('reporte_curso_view')
+        except:
+            print "An error"
+    context = {
+        "object_list": "eee",
+        "curso":curso,
+        "form":form,
+        "Profesionista": Profesionista.objects.all()
+    }
+    return render(request, "Carlos_Home/edicion_curso.html", context)

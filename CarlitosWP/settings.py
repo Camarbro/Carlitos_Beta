@@ -119,9 +119,12 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
+DATE_FORMAT = 'm/d/Y'
+SHORT_DATE_FORMAT = 'm/d/Y'
+TIME_FORMAT = 'H:i'
 
 from django.core.urlresolvers import reverse_lazy
 

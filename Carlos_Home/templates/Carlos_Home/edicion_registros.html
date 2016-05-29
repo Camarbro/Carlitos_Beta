@@ -7,7 +7,7 @@
 {% block content %}
 <aside class="callout" style="background: url({% static 'images/admin.jpg' %}) no-repeat center center scroll;">
   <div class="text-vertical-center">
-      <h1 style="color: #fff">Panel de Control</h1>
+      <h1 style="color: #fff">Edicion de Registros</h1>
   </div>
 </aside>
 <div class="container">
@@ -21,39 +21,39 @@
                         <div class="service-item">
                             <span style = "color: #0000ff" class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x"></i>
-                              <i style = "color: #fff" class="fa fa-pencil-square-o fa-stack-1x text-primary"></i>
+                              <i style = "color: #fff" class="fa fa-book fa-stack-1x text-primary"></i>
                             </span>
                             <h4>
-                                <strong>Blog</strong>
+                                <strong>Editar Curso</strong>
                             </h4>
-                            <p>For new users </p>
-                            <a href="{% url 'blog_admin' %}"  class="btn btn-primary btn-lg">Click Aqui!!</a>
+                            <p>Entra al reporte de curso y selecciona el curso a editar</p>
+                            <a href="{% url 'reporte_curso_view' %}"  class="btn btn-primary btn-lg">Click Aqui!!</a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="service-item">
                             <span style = "color: #00e600" class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x"></i>
-                              <i style = "color: #fff" class="fa fa-file-text fa-stack-1x text-primary"></i>
+                              <i style = "color: #fff" class="fa fa-stethoscope fa-stack-1x text-primary"></i>
                             </span>
                             <h4>
-                                <strong>Edicion Registros</strong>
+                                <strong>Editar Paciente</strong>
                             </h4>
-                            <p>Start a new order</p>
-                            <a href="{% url 'edicion_registros' %}"  class="btn btn-primary btn-lg">Click Aqui!!</a>
+                            <p>Entra a la lista de pacientes y selecciona el paciente a editar</p>
+                            <a href="{% url 'lista_paciente' %}"  class="btn btn-primary btn-lg">Click Aqui!!</a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="service-item">
-                            <span style = "color: #e6e600" class="fa-stack fa-4x">
+                            <span style = "color: #ff0000" class="fa-stack fa-4x">
                             <i class="fa fa-circle fa-stack-2x"></i>
-                            <i style = "color: #fff" class="fa fa-book fa-stack-1x text-primary"></i>
+                            <i style = "color: #fff" class="fa fa-stethoscope fa-stack-1x text-primary"></i>
                         </span>
                             <h4>
-                                <strong>Reportes</strong>
+                                <strong>Editar Paciente OS</strong>
                             </h4>
-                            <p>Quality Options for Supervisors</p>
-                            <a href="{% url 'reportes_view' %}"  class="btn btn-primary btn-lg">Click Aqui!!</a>
+                            <p>Entra a la busqueda de pacientes y busca el paciente a editar</p>
+                            <a href="#"  class="btn btn-primary btn-lg">Click Aqui!!</a>
                         </div>
                     </div>
                 <!-- /.row (nested) -->

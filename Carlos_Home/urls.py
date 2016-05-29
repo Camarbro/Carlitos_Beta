@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import home, about, ContactView, Registros, Reportes, CursoView, ProfesionitaView, admin, PacienteView, ReporteProfesionista, ReportePaciente, ReporteCurso, Crear_Post, post_detalle, post_lista, Crear_Categoria, BlogAdmin, Registro, Cursos, test, Blog, buscar2, delete_post, update_post
+from .views import home, about, ContactView, Registros, Reportes, CursoView, ProfesionitaView, admin, PacienteView, ReporteProfesionista, ReportePaciente, ReporteCurso, Crear_Post, post_detalle, post_lista, Crear_Categoria, BlogAdmin, Registro, Cursos, test, Blog, buscar2, delete_post, update_post, edicion_registros,delete_curso, delete_profesionista, delete_paciente, edicion_curso, edicion_paciente, lista_paciente
 from django.contrib.auth.views import login, logout_then_login
 
 urlpatterns = [
@@ -17,7 +17,14 @@ urlpatterns = [
 	url(r'^panel_admin/blogadmin/post_lista/post_detalle/(?P<id>\d+)/$', post_detalle, name='post_detalle'),
 	url(r'^panel_admin/blogadmin/post_lista/post_delete/(?P<id>\d+)/$', delete_post, name='delete_post'),
 	url(r'^panel_admin/blogadmin/post_lista/post_update/(?P<id>\d+)/$', update_post, name='update_post'),
+	url(r'^panel_admin/edicion_registros/$', edicion_registros, name = 'edicion_registros'),
+	url(r'^panel_admin/edicion_registros/edicion_curso/(?P<id>\d+)/$', edicion_curso, name = 'edicion_curso'),
+	url(r'^panel_admin/edicion_registros/lista_paciente/$',lista_paciente, name = 'lista_paciente'),
+	url(r'^panel_admin/edicion_registros/lista_paciente/edicion_paciente/(?P<id>\d+)/$', edicion_paciente, name = 'edicion_paciente'),
     url(r'^panel_admin/reportes$', Reportes, name = "reportes_view"),
+	url(r'^panel_admin/reportes/ReporteCurso/eliminar_curso/(?P<id>\d+)/$', delete_curso, name = 'delete_curso'),
+	url(r'^panel_admin/reportes/ReporteCurso/eliminar_profesionista/(?P<id>\d+)/$', delete_profesionista, name = 'delete_profesionista'),
+	url(r'^panel_admin/reportes/ReporteCurso/eliminar_paciente/(?P<id>\d+)/$', delete_paciente, name = 'delete_paciente'),
     url(r'^panel_admin/reportes/ReporteProfesionista/$', ReporteProfesionista.as_view(), name='reporte_profesionista_view'),
 	url(r'^panel_admin/reportes/ReportePaciente/$', ReportePaciente.as_view(), name='reporte_paciente_view'),
     url(r'^panel_admin/reportes/ReporteCurso/$', ReporteCurso.as_view(), name='reporte_curso_view'),
