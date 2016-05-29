@@ -342,9 +342,17 @@
   background-color: #fff;
 }
 
+#loginmobile{
+  color: #white !important;
+  background: none;
+}
+
 @media screen and (max-width: 768px) {
   .fh5co-nav-toggle {
     top: 0px !important;
+  }
+  #loginmobile {
+    color: #black !important;
   }
 }
 
