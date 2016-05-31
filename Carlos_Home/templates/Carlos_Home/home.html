@@ -24,15 +24,11 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                   {% if form.errors %}
-                  {% for field in form %}
-                  {% for error in field.errors %}
-                  <div class="alert alert-danger col-xs-8 col-xs-push-2" role="alert">
+                  <div class="alert alert-danger text-center" role="alert">
                   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                   <span class="sr-only">Error:</span>
-                  &nbsp;{{error | escape}}
+                  &nbsp; <br> Usuario Contraseña Invalido
                   </div>
-                  {% endfor %}
-                  {% endfor %}
                   {% endif %}
                   <button type="submit" class="btn btn-default btn-xs btn-block">Login</button>
                   <button type="reset" class="btn btn-default btn-xs btn-block">Cancel</button>
